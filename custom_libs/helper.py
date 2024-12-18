@@ -7,17 +7,17 @@ single_color=['darksalmon']
 def draw_barchart(df, key, binary):
     if binary:
         df[key].value_counts().plot(kind="bar", color=binary_color);
-    else:
-        df[key].value_counts().plot(kind="bar", color=single_color);
-
-def draw_histogram_density_curve(df, key):
-    sns.histplot(df[key], kde=True, color='darksalmon', edgecolor='grey', alpha=0.7)
+    else:    sns.histplot(df[key], kde=True, color='darksalmon', edgecolor='grey', alpha=0.7)
 
     plt.title('Histogram with Density Curve')
     plt.xlabel(key)
     plt.ylabel('Density')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.show()
+        df[key].value_counts().plot(kind="bar", color=single_color);
+
+def draw_histogram_density_curve(df, key):
+
 
 def draw_histogram(df, key):
     min_value = int(df[key].min())
