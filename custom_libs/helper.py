@@ -14,10 +14,7 @@ def draw_barchart(df, key, binary):
     plt.ylabel('Density')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.show()
-        df[key].value_counts().plot(kind="bar", color=single_color);
-
-def draw_histogram_density_curve(df, key):
-
+    df[key].value_counts().plot(kind="bar", color=single_color);
 
 def draw_histogram(df, key):
     min_value = int(df[key].min())
