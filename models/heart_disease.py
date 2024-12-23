@@ -14,7 +14,7 @@ class HeartDisease():
     THALASSEMIA             = "Thalassemia"             # thal
     TARGET                  = "Target"                  # num
 
-def get_hd_columns():
+def get_standard_features():
     result = []
     result.append(HeartDisease.AGE)
     result.append(HeartDisease.GENDER)
@@ -27,6 +27,21 @@ def get_hd_columns():
     result.append(HeartDisease.EXE_ANGINA)
     result.append(HeartDisease.EXE_ST_DEPRESSION)
     result.append(HeartDisease.EXE_ST_SEGMENT_SLOPE)
+    result.append(HeartDisease.MAJOR_VESSELS)
+    result.append(HeartDisease.THALASSEMIA)
+    result.append(HeartDisease.TARGET)
+    return result
+
+def get_reduced_features():
+    result = []
+    result.append(HeartDisease.AGE)
+    result.append(HeartDisease.CHEST_PAIN)
+    result.append(HeartDisease.BP_SYSTOLIC)
+    result.append(HeartDisease.CHOLESTEROL)
+    result.append(HeartDisease.REST_ECG)
+    result.append(HeartDisease.EXE_MAX_HEARTRATE)
+    result.append(HeartDisease.EXE_ANGINA)
+    result.append(HeartDisease.EXE_ST_DEPRESSION)
     result.append(HeartDisease.MAJOR_VESSELS)
     result.append(HeartDisease.THALASSEMIA)
     result.append(HeartDisease.TARGET)
