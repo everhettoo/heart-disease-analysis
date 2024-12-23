@@ -14,8 +14,11 @@ class UCIHeartDiseaseData:
     thalassemia             = "Thalassemia"             # thal
     target                  = "Target"                  # num
 
-class UCIHeartDiseaseDataFilepath:
+class UCIHeartDiseaseDataFile:
     cleveland_standard          = 'data/uci-heart-disease/processed.cleveland.data'
+    hungarian_standard          = 'data/uci-heart-disease/processed.hungarian.data'
+    longbeach_standard          = 'data/uci-heart-disease/processed.va.data'
+    switzerland_standard        = 'data/uci-heart-disease/processed.switzerland.data'
     cleveland_cleansed          = 'data/uci-heart-disease/processed.cleveland-cleansed.data'
     cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-cleansed-preprocessed.data'
 
