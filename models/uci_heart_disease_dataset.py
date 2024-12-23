@@ -7,7 +7,7 @@ class UCIHeartDiseaseData:
     blood_sugar             = "Blood Sugar"             # fbs
     rest_ecg                = "Rest ECG"                # restecg
     exe_max_heartrate       = "Exe. Max Heartrate"      # thalach
-    exe_induced_angina      = "Exe. induced Angina"     # exang
+    exe_induced_angina      = "Exe. Induced Angina"     # exang
     exe_st_depression       = "Exe. ST Depression"      # old[peak
     exe_st_segment_slope    = "Exe. ST Segment Slope"   # slope
     major_vessels           = "Major Vessels"           # ca
@@ -19,6 +19,7 @@ class UCIHeartDiseaseDataFile:
     hungarian_standard          = 'data/uci-heart-disease/processed.hungarian.data'
     longbeach_standard          = 'data/uci-heart-disease/processed.va.data'
     switzerland_standard        = 'data/uci-heart-disease/processed.switzerland.data'
+    salvaged_standard           = 'data/uci-heart-disease/processed.switzerland-salvaged.data'
     cleveland_cleansed          = 'data/uci-heart-disease/processed.cleveland-cleansed.data'
     cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-cleansed-preprocessed.data'
 
