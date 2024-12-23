@@ -1,7 +1,7 @@
 class UCIHeartDiseaseData:
     age                     = "Age"                     # age
     gender                  = "Gender"                  # sex
-    chest_pain              = "Chest Pain"              #cp
+    chest_pain              = "Chest Pain"              # cp
     bp_systolic             = "BP Systolic"             # trestbps
     cholesterol             = "Cholesterol"             # chol
     blood_sugar             = "Blood Sugar"             # fbs
@@ -13,6 +13,11 @@ class UCIHeartDiseaseData:
     major_vessels           = "Major Vessels"           # ca
     thalassemia             = "Thalassemia"             # thal
     target                  = "Target"                  # num
+
+class UCIHeartDiseaseDataFilepath:
+    cleveland_standard          = 'data/uci-heart-disease/processed.cleveland.data'
+    cleveland_cleansed          = 'data/uci-heart-disease/processed.cleveland-cleansed.data'
+    cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-cleansed-preprocessed.data'
 
 def get_standard_features():
     result = []
