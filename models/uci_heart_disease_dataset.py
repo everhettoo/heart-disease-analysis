@@ -136,8 +136,8 @@ class UCIHeartDiseaseDataFile:
     # Cleveland cleansed - The processed.cleveland.data made ready for model building (duplicate removed)
     cleveland_cleansed          = 'data/uci-heart-disease/processed.cleveland-cleansed.data'
 
-    # # Cleveland preprocessed - The processed.cleveland.data made ready for model building (duplicate removed)
-    # cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-cleansed-preprocessed.data'
+    # Cleveland preprocessed - The processed.cleveland-cleansed.data made ready for model building (duplicate removed)
+    cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-preprocessed.data'
 
 
 def get_standard_features():
@@ -165,6 +165,21 @@ def get_reduced_features():
     result.append(UCIHeartDiseaseData.bp_systolic)
     result.append(UCIHeartDiseaseData.cholesterol)
     result.append(UCIHeartDiseaseData.rest_ecg)
+    result.append(UCIHeartDiseaseData.exe_max_heartrate)
+    result.append(UCIHeartDiseaseData.exe_induced_angina)
+    result.append(UCIHeartDiseaseData.exe_st_depression)
+    result.append(UCIHeartDiseaseData.major_vessels)
+    result.append(UCIHeartDiseaseData.thalassemia)
+    result.append(UCIHeartDiseaseData.target)
+    return result
+
+def get_reduced_features2():
+    result = []
+    result.append(UCIHeartDiseaseData.age)
+    result.append(UCIHeartDiseaseData.chest_pain)
+    result.append(UCIHeartDiseaseData.bp_systolic)
+    result.append(UCIHeartDiseaseData.cholesterol)
+    # result.append(UCIHeartDiseaseData.rest_ecg)
     result.append(UCIHeartDiseaseData.exe_max_heartrate)
     result.append(UCIHeartDiseaseData.exe_induced_angina)
     result.append(UCIHeartDiseaseData.exe_st_depression)
