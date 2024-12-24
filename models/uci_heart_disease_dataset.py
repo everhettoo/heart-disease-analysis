@@ -1,3 +1,84 @@
+class UCIHeartDiseaseOriginalData:
+    # The original (raw) dataset has 76 variables.
+    headers = [
+        'id',
+        'ccf',
+        'age',
+        'sex',
+        'painloc',
+        'painexer',
+        'relrest',
+        'pncaden',
+        'cp',
+        'trestbps',
+        'htn',
+        'chol',
+        'smoke',
+        'cigs',
+        'years',
+        'fbs',
+        'dm',
+        'famhist',
+        'restecg',
+        'ekgmo',
+        'ekgday',
+        'ekgyr',
+        'dig',
+        'prop',
+        'nitr',
+        'pro',
+        'diuretic',
+        'proto',
+        'thaldur',
+        'thaltime',
+        'met',
+        'thalach',
+        'thalrest',
+        'tpeakbps',
+        'tpeakbpd',
+        'dummy',
+        'trestbpd',
+        'exang',
+        'xhypo',
+        'oldpeak',
+        'slope',
+        'rldv5',
+        'rldv5e',
+        'ca',
+        'restckm',
+        'exerckm',
+        'restef',
+        'restwm',
+        'exeref',
+        'exerwm',
+        'thal',
+        'thalsev',
+        'thalpul',
+        'earlobe',
+        'cmo',
+        'cday',
+        'cyr',
+        'num',
+        'lmt',
+        'ladprox',
+        'laddist',
+        'diag',
+        'cxmain',
+        'ramus',
+        'om1',
+        'om2',
+        'rcaprox',
+        'rcadist',
+        'lvx1',
+        'lvx2',
+        'lvx3',
+        'lvx4',
+        'lvf',
+        'cathef',
+        'junk',
+        'name'
+    ]
+
 class UCIHeartDiseaseData:
     age                     = "Age"                     # age
     gender                  = "Gender"                  # sex
@@ -22,6 +103,9 @@ class UCIHeartDiseaseDataFile:
     salvaged_standard           = 'data/uci-heart-disease/processed.salvaged.data'
     cleveland_cleansed          = 'data/uci-heart-disease/processed.cleveland-cleansed.data'
     cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-cleansed-preprocessed.data'
+    hungarian_recovered         = 'data/uci-heart-disease/recovered-hungarian.data'
+    longbeach_recovered         = 'data/uci-heart-disease/recovered-va.data'
+    switzerland_recovered       = 'data/uci-heart-disease/recovered-switzerland.data'
 
 def get_standard_features():
     result = []
@@ -55,6 +139,9 @@ def get_reduced_features():
     result.append(UCIHeartDiseaseData.thalassemia)
     result.append(UCIHeartDiseaseData.target)
     return result
+
+def get_original_features():
+    return UCIHeartDiseaseOriginalData.headers
 
 
 
