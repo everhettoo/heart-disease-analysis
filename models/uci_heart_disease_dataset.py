@@ -106,7 +106,7 @@ class UCIHeartDiseaseData:
     rest_ecg                = "Rest ECG"                # restecg
     exe_max_heartrate       = "Exe. Max Heartrate"      # thalach
     exe_induced_angina      = "Exe. Induced Angina"     # exang
-    exe_st_depression       = "Exe. ST Depression"      # old[peak
+    exe_st_depression       = "Exe. ST Depression"      # oldpeak
     exe_st_segment_slope    = "Exe. ST Segment Slope"   # slope
     major_vessels           = "Major Vessels"           # ca
     thalassemia             = "Thalassemia"             # thal
