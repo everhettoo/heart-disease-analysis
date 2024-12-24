@@ -1,6 +1,6 @@
 class UCIHeartDiseaseOriginalData:
     # The original (raw) dataset has 76 variables.
-    headers = [
+    full_headers = [
         'id',
         'ccf',
         'age',
@@ -79,6 +79,23 @@ class UCIHeartDiseaseOriginalData:
         'name'
     ]
 
+    standard_header = [
+        'age',
+        'sex',
+        'cp',
+        'trestbps',
+        'chol',
+        'fbs',
+        'restecg',
+        'thalach',
+        'exang',
+        'oldpeak',
+        'slope',
+        'ca',
+        'thal',
+        'num'
+    ]
+
 class UCIHeartDiseaseData:
     age                     = "Age"                     # age
     gender                  = "Gender"                  # sex
@@ -96,16 +113,32 @@ class UCIHeartDiseaseData:
     target                  = "Target"                  # num
 
 class UCIHeartDiseaseDataFile:
-    cleveland_standard          = 'data/uci-heart-disease/processed.cleveland.data'
-    hungarian_standard          = 'data/uci-heart-disease/processed.hungarian.data'
-    longbeach_standard          = 'data/uci-heart-disease/processed.va.data'
-    switzerland_standard        = 'data/uci-heart-disease/processed.switzerland.data'
-    salvaged_standard           = 'data/uci-heart-disease/processed.salvaged.data'
-    cleveland_cleansed          = 'data/uci-heart-disease/processed.cleveland-cleansed.data'
-    cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-cleansed-preprocessed.data'
+    # Raw dataset (76 columns)
+    cleveland_raw               = 'data/uci-heart-disease/cleveland.data'
+    hungarian_raw               = 'data/uci-heart-disease/hungarian.data'
+    longbeach_raw               = 'data/uci-heart-disease/long-beach-va.data'
+    switzerland_raw             = 'data/uci-heart-disease/switzerland.data'
+
+    # Processed dataset (14 columns)
+    cleveland_processed          = 'data/uci-heart-disease/processed.cleveland.data'
+    hungarian_processed          = 'data/uci-heart-disease/processed.hungarian.data'
+    longbeach_processed          = 'data/uci-heart-disease/processed.va.data'
+    switzerland_processed        = 'data/uci-heart-disease/processed.switzerland.data'
+
+    # Recovered dataset (76 columns)
     hungarian_recovered         = 'data/uci-heart-disease/recovered-hungarian.data'
     longbeach_recovered         = 'data/uci-heart-disease/recovered-va.data'
     switzerland_recovered       = 'data/uci-heart-disease/recovered-switzerland.data'
+
+    # Salvaged (14 columns from processed long beach and hungarian [2 records])
+    salvaged_standard           = 'data/uci-heart-disease/processed.salvaged.data'
+
+    # Cleveland cleansed - The processed.cleveland.data made ready for model building (duplicate removed)
+    cleveland_cleansed          = 'data/uci-heart-disease/processed.cleveland-cleansed.data'
+
+    # # Cleveland preprocessed - The processed.cleveland.data made ready for model building (duplicate removed)
+    # cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-cleansed-preprocessed.data'
+
 
 def get_standard_features():
     result = []
@@ -140,8 +173,11 @@ def get_reduced_features():
     result.append(UCIHeartDiseaseData.target)
     return result
 
-def get_original_features():
-    return UCIHeartDiseaseOriginalData.headers
+def get_original_full_features():
+    return UCIHeartDiseaseOriginalData.full_headers
+
+def get_original_standard_features():
+    return UCIHeartDiseaseOriginalData.standard_header
 
 
 

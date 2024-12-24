@@ -1,5 +1,9 @@
 from unittest import TestCase
-from models.uci_heart_disease_dataset import UCIHeartDiseaseData, get_standard_features, get_reduced_features
+
+from models.uci_heart_disease_dataset import (UCIHeartDiseaseData,
+                                              get_standard_features,
+                                              get_reduced_features,
+                                              get_original_standard_features)
 
 class TestUCIHeartDiseaseDataset(TestCase):
     def test_get_original_features(self):
@@ -38,4 +42,11 @@ class TestUCIHeartDiseaseDataset(TestCase):
         expected_columns.append(UCIHeartDiseaseData.target)
 
         self.assertListEqual(expected_columns, get_reduced_features())
+
+    def test_get_original_standard_features(self):
+        expected_columns = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca','thal', 'num']
+
+        self.assertListEqual(expected_columns, get_original_standard_features())
+
+
 
