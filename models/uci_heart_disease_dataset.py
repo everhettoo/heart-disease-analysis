@@ -19,7 +19,7 @@ class UCIHeartDiseaseDataFile:
     hungarian_standard          = 'data/uci-heart-disease/processed.hungarian.data'
     longbeach_standard          = 'data/uci-heart-disease/processed.va.data'
     switzerland_standard        = 'data/uci-heart-disease/processed.switzerland.data'
-    salvaged_standard           = 'data/uci-heart-disease/processed.switzerland-salvaged.data'
+    salvaged_standard           = 'data/uci-heart-disease/processed.salvaged.data'
     cleveland_cleansed          = 'data/uci-heart-disease/processed.cleveland-cleansed.data'
     cleveland_preprocessed      = 'data/uci-heart-disease/processed.cleveland-cleansed-preprocessed.data'
 
