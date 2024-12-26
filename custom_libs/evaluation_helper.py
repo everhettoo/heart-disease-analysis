@@ -7,6 +7,7 @@ import warnings
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import math as math
 from sklearn.metrics import RocCurveDisplay
 from sklearn.metrics import classification_report, accuracy_score
 from sklearn.metrics import confusion_matrix
@@ -15,7 +16,10 @@ from sklearn.preprocessing import StandardScaler
 
 warnings.filterwarnings("ignore")
 
-# Dictionary to store model accuracies for result comparisons.
+# Dictionary to store global model's accuracies for result comparisons.
+global_accuracies = {}
+
+# Dictionary to store local model's accuracies for result comparisons.
 accuracies = {}
 
 # Randomness to reproduce same splits for comparisons.
@@ -61,8 +65,8 @@ Description     : A function to display classification-report, confusion-matrix 
 """
 def display_validation_report(y_test, y_pred, x_test, classifier, test_name):
     # Manually calculate accuracy in % for storing result.
-    svc_acc=round(accuracy_score(y_test, y_pred)*100,2)
-    accuracies[test_name] = svc_acc
+    svc_acc=accuracy_score(y_test, y_pred)*100
+    accuracies[test_name] = math.ceil(svc_acc)
 
     # Display the classification report.
     print("\nClassification Report")
