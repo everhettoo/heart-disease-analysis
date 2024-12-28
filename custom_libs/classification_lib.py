@@ -15,9 +15,9 @@ import models.global_data as gd
 Description: 
 """
 def get_class_counters(y_set, y_train, y_test):
-    data = [['Entire', Counter(y_set).get('0'), Counter(y_set).get('1')],
-            ['Train', Counter(y_train).get('0'), Counter(y_train).get('1')],
-            ['Test', Counter(y_test).get('0'), Counter(y_test).get('1')], ]
+    data = [['Entire', Counter(y_set).get(0), Counter(y_set).get(1)],
+            ['Train', Counter(y_train).get(0), Counter(y_train).get(1)],
+            ['Test', Counter(y_test).get(0), Counter(y_test).get(1)], ]
     # print(data)
     return pd.DataFrame(data, columns=['Set','0','1'])
 
@@ -47,45 +47,43 @@ def create_validation_report(y_test, y_pred, x_test, classifier, test_name, verb
     result = {}
 
     # Creates classification report for test-set vs prediction.
-    print("\nCreating classification-report ...")
+    print(f"\nCreating classification-report for [{test_name}] ...")
 
     if verbose:
-        print(f'Classification-report   :{classification_report(y_test, y_pred)}.')
+        print(classification_report(y_test, y_pred))
 
     # Stores few metrics from classification-reports. Accuracy is one of then and can be accessed result['accuracy'].
     result[gd.ValidationReportKey.classification_report] = classification_report(y_test, y_pred, output_dict=True)
 
     # Stores the confusion matrix for test-set vs prediction.
-    print("\nCreating confusion-matrix ...")
+    print(f"\nCreating confusion-matrix for [{test_name}] ...")
 
     if verbose:
-        print(f'Confusion matrix        :{confusion_matrix(y_test, y_pred)}')
+        print(confusion_matrix(y_test, y_pred))
 
-    result[gd.ValidationReportKey.confusion_matrix] = confusion_matrix(y_test, y_pred, output_dict=True)
+    result[gd.ValidationReportKey.confusion_matrix] = confusion_matrix(y_test, y_pred)
 
-    # Stores ROC Curve for display.
-    result[gd.ValidationReportKey.roc_curve] = RocCurveDisplay.from_estimator(estimator=classifier, X=x_test, y=y_test)
+    print(f"\nEvaluation result was created for [{test_name}] ...")
+
+    return result
 
 """
 Description: Builds a basic model using the x-sets, and predicts using the y-train set. 
 """
-def build_and_predict(cls, x_set, y_set, test_name):
-    print(f'\nEvaluation name: {test_name}. Building base-model...')
+def build_and_predict(cls, x_train, y_train, x_test, test_name):
+    print(f'\nEvaluation name: [{test_name}]. Building base-model...')
 
     # Splits dataset for training and testing (classes are balanced using stratify split).
-    x_train, x_test, y_train, y_test = scale_and_split(x_set, y_set)
+    # x_train, x_test, y_train, y_test = scale_and_split(x_set, y_set)
 
     # Train the model with training set.
     # Without the random-state, DT is producing different result despite the random-state in sample split for training-set.
     cls.fit(x_train, y_train)
 
     # Display the best hyperparameters used.
-    print(f'Params         :{cls.get_params()}.')
+    print(f'Params:{ cls.get_params()}.')
 
     # Do prediction with the trained model.
-    y_pred = cls.predict(x_test)
-
-    # Calls the evaluation helper module to display classification-report, confusion-matrix and ROC curve.
-    ev.display_validation_report(y_test, y_pred, x_test, dc, test_name)
+    return cls.predict(x_test)
 
 
