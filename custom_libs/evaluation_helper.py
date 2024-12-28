@@ -4,6 +4,7 @@ Description     : This helper module is to provide necessary parameters and func
                   validation.
 """
 import warnings
+from collections import Counter
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -64,15 +65,23 @@ Description     : A function to display classification-report, confusion-matrix 
                   result analysis.
 """
 def display_validation_report(y_test, y_pred, x_test, classifier, test_name):
-    # Manually calculate accuracy in % for storing result.
+    # Manually calculate accuracy in % of the test-set and prediction result.
     svc_acc=accuracy_score(y_test, y_pred)*100
     accuracies[test_name] = math.ceil(svc_acc)
 
-    # Display the classification report.
+    # Display the classification report for test-set vs prediction.
     print("\nClassification Report")
     print(classification_report(y_test, y_pred))
+    result = classification_report(y_test, y_pred, output_dict=True)
+    print(result)
+    print(f'accuracy: {result['accuracy']}.')
 
-    # Display the confusion matrix.
+    tmp = {}
+    tmp['t0'] = result
+    tmp['t1'] = result
+    print(f'accuracy t1: {tmp['t1']['accuracy']}.')
+
+    # Display the confusion matrix for test-set vs prediction.
     print("\nConfusion Matrix")
     cm = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(3, 3))
@@ -92,6 +101,6 @@ def scale_and_split(x_set, y_set):
     scaler = StandardScaler()
     x_set = scaler.fit_transform(x_set)
 
-    # Do the train and test splits.
-    # random-state for reproducing the same result. Also, stratify class.
+    # The random-state ensures to split is deterministic (same set for reproducing same results).
+    # Meanwhile, stratify ensures the classes are evenly split for train and test.
     return train_test_split(x_set, y_set, test_size = 0.20, stratify=y_set, random_state=random_state)
