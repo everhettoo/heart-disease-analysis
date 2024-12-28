@@ -89,7 +89,7 @@ def display_validation_report(y_test, y_pred, x_test, classifier, test_name):
 Description     : A function to scale and do train and test splits.
 """
 def scale_and_split(x_set, y_set):
-    # SVM is very slow with unscaled/normalized data.
+    # Some algo like SVM is very slow with unscaled/normalized data.
     scaler = StandardScaler()
     x_set = scaler.fit_transform(x_set)
 
