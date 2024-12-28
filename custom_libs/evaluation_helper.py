@@ -72,14 +72,6 @@ def display_validation_report(y_test, y_pred, x_test, classifier, test_name):
     # Display the classification report for test-set vs prediction.
     print("\nClassification Report")
     print(classification_report(y_test, y_pred))
-    result = classification_report(y_test, y_pred, output_dict=True)
-    print(result)
-    print(f'accuracy: {result['accuracy']}.')
-
-    tmp = {}
-    tmp['t0'] = result
-    tmp['t1'] = result
-    print(f'accuracy t1: {tmp['t1']['accuracy']}.')
 
     # Display the confusion matrix for test-set vs prediction.
     print("\nConfusion Matrix")

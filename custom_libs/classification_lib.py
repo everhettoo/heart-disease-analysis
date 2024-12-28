@@ -6,10 +6,11 @@ Description     : Most steps for building a classifier is repeating. The code fr
 from collections import Counter
 
 from sklearn.metrics import classification_report, confusion_matrix, RocCurveDisplay
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
 import models.global_data as gd
+from sklearn.model_selection import GridSearchCV
 
 """
 Description: 
@@ -70,20 +71,42 @@ def create_validation_report(y_test, y_pred, x_test, classifier, test_name, verb
 """
 Description: Builds a basic model using the x-sets, and predicts using the y-train set. 
 """
-def build_and_predict(cls, x_train, y_train, x_test, test_name):
-    print(f'\nEvaluation name: [{test_name}]. Building base-model...')
+def fine_tune_with_grid_search_cv(cls, x_train, y_train, x_test, parameters, folds, test_name):
+    print(f'\nEvaluation name: [{test_name}]. Fine tuning model...')
 
-    # Splits dataset for training and testing (classes are balanced using stratify split).
-    # x_train, x_test, y_train, y_test = scale_and_split(x_set, y_set)
+    grid_scv = GridSearchCV(cls, parameters, scoring='accuracy', cv=folds)
 
     # Train the model with training set.
     # Without the random-state, DT is producing different result despite the random-state in sample split for training-set.
-    cls.fit(x_train, y_train)
+    grid_scv.fit(x_train, y_train)
 
-    # Display the best hyperparameters used.
-    print(f'Params:{ cls.get_params()}.')
+    # Display the best hyperparameters and score. The best score is mean of CV scores for train-set.
+    print(f'Best params          :{grid_scv.best_params_}.')
+    print(f'Best score (*mean)   :{grid_scv.best_score_}.')
 
     # Do prediction with the trained model.
-    return cls.predict(x_test)
+    return grid_scv.predict(x_test)
+
+# """
+# Description: Builds a basic model using the x-sets, and predicts using the y-train set.
+# """
+# def fine_tune_and_predict(cls, x_train, y_train, x_test, test_name):
+#     print(f'\nEvaluation name: [{test_name}]. Fine-tuning model and cross-validating ...')
+#     # Train the model with training set.
+#     # Without the random-state, DT is producing different result despite the random-state in sample split for training-set.
+#     cls.fit(x_train, y_train)
+#
+#     if fine_tune:
+#         # Display the best hyperparameters and score. The best score is mean of CV scores for train-set.
+#         print(f'Best params          :{cls.best_params_}.')
+#         print(f'Best score (*mean)   :{cls.best_score_}.')
+#     else:
+#         # Display the best hyperparameters used.
+#         print(f'Params:{ cls.get_params()}.')
+#
+#     # Do prediction with the trained model.
+#     return cls.predict(x_test)
+# #     # Do prediction with the trained model.
+# #     return cls.predict(x_test)
 
 
