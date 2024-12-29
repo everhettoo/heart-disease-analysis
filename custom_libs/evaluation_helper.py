@@ -32,12 +32,12 @@ kfold_n_split =5
 # K-fold shuffle for cv.
 kfold_shuffle =True
 
+
 """
 There are two datasets used, and each has three types of evaluations:
-
 Datasets:
 - Standard          - a preprocessed dataset.
-- Over sampled      - the preprocessed dataset was oversample for class balancing.
+- Over sampled      - the preprocessed dataset was oversampled for class balancing.
  
 Evaluations:
 - base model        - without hyperparameter tuning and cross validation.
@@ -60,31 +60,38 @@ class EvaluationType:
     # Over sampled data with random search cv.
     os_random_search_cv    = "os-rand-scv"
 
+
 """
 Description     : A function to display classification-report, confusion-matrix and ROC curve for model 
-                  result analysis.
+                  result analysis. Returns accuracy from classification report.
 """
-def display_validation_report(y_test, y_pred, x_test, classifier, test_name):
+def display_validation_report(y_test, y_pred, x_test, classifier):
     # Manually calculate accuracy in % of the test-set and prediction result.
-    svc_acc=accuracy_score(y_test, y_pred)*100
-    accuracies[test_name] = math.ceil(svc_acc)
+    # acc_score = accuracy_score(y_test, y_pred) * 100
+    # accuracies[test_name] = math.ceil(acc_score)
 
     # Display the classification report for test-set vs prediction.
     print("\nClassification Report")
     print(classification_report(y_test, y_pred))
 
+    # Retrieve accuracy from classification-report.
+    acc_result = classification_report(y_test, y_pred, output_dict=True)
+    accuracy = acc_result['accuracy']
+
     # Display the confusion matrix for test-set vs prediction.
     print("\nConfusion Matrix")
     cm = confusion_matrix(y_test, y_pred)
-    plt.figure(figsize=(3, 3))
-    sns.heatmap(cm, annot=True, linewidths=.5, square=True, cmap='Blues', cbar=False)
-    plt.ylabel('Truth');
+    plt.figure(figsize = (3, 3))
+    sns.heatmap(cm, annot=True, linewidths = .5, square = True, cmap = 'Blues', cbar = False)
+    plt.ylabel('Truth')
     plt.xlabel('Predicted')
 
     # Display ROC Curve.
-    RocCurveDisplay.from_estimator(estimator=classifier,
-                                   X=x_test,
-                                   y=y_test);
+    RocCurveDisplay.from_estimator(estimator = classifier, X = x_test, y = y_test);
+
+    return math.ceil(accuracy)
+
+
 """
 Description     : A function to scale and do train and test splits.
 """
