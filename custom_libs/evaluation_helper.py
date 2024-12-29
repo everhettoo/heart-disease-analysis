@@ -77,6 +77,9 @@ def display_validation_report(y_test, y_pred, x_test, classifier):
     # Retrieve accuracy from classification-report.
     acc_result = classification_report(y_test, y_pred, output_dict=True)
     accuracy = acc_result['accuracy'] * 100
+    print(f'Actual accuracy result: {accuracy}.')
+    processed_accuracy = round(accuracy, 0)
+    print(f'Parsed accuracy result: {round(processed_accuracy, 0)}.')
 
     # Display the confusion matrix for test-set vs prediction.
     print("\nConfusion Matrix")
@@ -89,7 +92,7 @@ def display_validation_report(y_test, y_pred, x_test, classifier):
     # Display ROC Curve.
     RocCurveDisplay.from_estimator(estimator = classifier, X = x_test, y = y_test);
 
-    return math.ceil(accuracy)
+    return processed_accuracy
 
 
 """
@@ -104,6 +107,7 @@ def scale_and_split(x_set, y_set):
     # Meanwhile, stratify ensures the classes are evenly split for train and test.
     return train_test_split(x_set, y_set, test_size = 0.20, stratify=y_set, random_state=random_state)
 
+# TODO
 """
 Description     : A function to scale and do train and test splits.
 """
