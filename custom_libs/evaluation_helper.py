@@ -17,10 +17,10 @@ from sklearn.preprocessing import StandardScaler
 
 warnings.filterwarnings("ignore")
 
-# Dictionary to store global model's accuracies for result comparisons.
-global_accuracies = {}
+# # Dictionary to store global model's accuracies for result comparisons.
+# global_accuracies = {}
 
-# Dictionary to store local model's accuracies for result comparisons.
+# Dictionary to store accuracies for result comparisons.
 accuracies = {}
 
 # Randomness to reproduce same splits for comparisons.
