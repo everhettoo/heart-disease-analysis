@@ -76,7 +76,7 @@ def display_validation_report(y_test, y_pred, x_test, classifier):
 
     # Retrieve accuracy from classification-report.
     acc_result = classification_report(y_test, y_pred, output_dict=True)
-    accuracy = acc_result['accuracy']
+    accuracy = acc_result['accuracy'] * 100
 
     # Display the confusion matrix for test-set vs prediction.
     print("\nConfusion Matrix")
