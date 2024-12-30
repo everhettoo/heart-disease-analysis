@@ -18,13 +18,13 @@ from sklearn.preprocessing import StandardScaler
 warnings.filterwarnings("ignore")
 
 # # Dictionary to store global model's accuracies for result comparisons.
-# global_accuracies = {}
+global_accuracies = {}
 
 # Dictionary to store accuracies for result comparisons.
 accuracies = {}
 
 # Randomness to reproduce same splits for comparisons.
-random_state = 1
+random_state = 42
 
 # K-fold split for cv.
 kfold_n_split =5
