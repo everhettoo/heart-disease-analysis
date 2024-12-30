@@ -1,0 +1,11 @@
+[ACC]
+nb = 87
+dt = 82
+lr = 88
+svm = 83
+rf = 83
+knn = 85
+
+[UPDATE]
+latest = 2024-12-30 23:25:29
+

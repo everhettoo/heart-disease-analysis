@@ -1,0 +1,11 @@
+[ACC]
+nb = 20
+dt = 30
+lr = 0
+svm = 0
+rf = 0
+knn = 0
+
+[UPDATE]
+latest = 2024-12-30 23:04:24
+

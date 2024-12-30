@@ -5,6 +5,8 @@ Description     : This helper module is to provide necessary parameters and func
 """
 import warnings
 from collections import Counter
+import configparser
+import datetime
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -15,10 +17,41 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-warnings.filterwarnings("ignore")
-
-# # Dictionary to store global model's accuracies for result comparisons.
-global_accuracies = {}
+from models.evaluation_type import EvaluationType
+# """
+# Description     : Static method to register model values.
+# """
+# # global global_accuracies
+# # class ModelAccuracyScore(object):
+# #     # Initialize global accuracies once.
+# #     # global global_accuracies = { 'NB':0, 'DT':0, 'LR':0, 'SVM':0, 'RF':0, 'KNN':0 }
+# #
+# #     @staticmethod
+# #     def register_model_accuracy(model_name, accuracy):
+# #         global global_accuracies[model_name] = accuracy
+# #         return ModelAccuracyScore.global_accuracies
+#
+# class ModelAccuracyScoreSingleton:
+#    __instance = None
+#    scores = {}
+#    @staticmethod
+#    def get_instance():
+#       """ Static access method. """
+#       if ModelAccuracyScoreSingleton.__instance is None:
+#          ModelAccuracyScoreSingleton()
+#       return ModelAccuracyScoreSingleton.__instance
+#
+#    def __init__(self):
+#       """ Virtually private constructor. """
+#       if ModelAccuracyScoreSingleton.__instance is not None:
+#          raise Exception("This class is a singleton!")
+#       else:
+#          ModelAccuracyScoreSingleton.__instance = self
+#
+# # warnings.filterwarnings("ignore")
+#
+# # # Dictionary to store global model's accuracies for result comparisons.
+# global_accuracies = ModelAccuracyScoreSingleton()
 
 # Dictionary to store accuracies for result comparisons.
 accuracies = {}
@@ -106,3 +139,34 @@ def scale_and_split(x_set, y_set):
     # The random-state ensures to split is deterministic (same set for reproducing same results).
     # Meanwhile, stratify ensures the classes are evenly split for train and test.
     return train_test_split(x_set, y_set, test_size = 0.20, stratify=y_set, random_state=random_state)
+
+"""
+Description     : Write result to config.
+"""
+def set_accuracy(model_name, score):
+    config = configparser.ConfigParser()
+    config.read('accuracy.score')
+
+    model_name = model_name.upper()
+    config['ACC'][model_name] = str(score)
+    config['UPDATE']['Latest'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    with open('accuracy.score', 'w') as configfile:  # save
+        config.write(configfile)
+
+"""
+Description     : Write result to config.
+"""
+def get_accuracies():
+    scores = {}
+    config = configparser.ConfigParser()
+    config.read('accuracy.score')
+    scores['NB'] = int(config.get('ACC','NB'))
+    scores['DT'] = int(config.get('ACC', 'DT'))
+    scores['LR'] = int(config.get('ACC', 'LR'))
+    scores['SVM'] = int(config.get('ACC', 'SVM'))
+    scores['RF'] = int(config.get('ACC', 'RF'))
+    scores['KNN'] = int(config.get('ACC', 'KNN'))
+    scores['Latest'] = config.get('UPDATE', 'Latest')
+    return scores
+
